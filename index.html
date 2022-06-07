@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Teste</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #504a66;
+        }
+
+        a {
+            display: block;
+            margin-top: 1px;
+            text-decoration: none;
+            color: #000;
+            border: 1px solid #8257e6;
+            width: 100%;
+            padding: 0.2rem 2rem;
+        }
+
+        .input-text-type {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .row {
+            width: 100%;
+            display: block;
+            padding: 2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div id="dropdown" class="row">
+            <input class="input-text-type" type="text" id="add-type" onkeyup="textType(this)">
+            <div class="type-techs" id="type-techs"></div>
+        </div>
+        <div id="selected-item" class="row"></div>
+    </div>
+
+    <script>
+
+        function textType(elm) {
+
+            let html = '';
+            let divAdd = document.getElementById("type-techs");
+            let term = elm.value.toUpperCase();
+            divAdd.innerHTML = '';
+            document.getElementById('selected-item').innerText = '';
+
+            if (!term) {
+                return;
+            }
+            let technologies = [
+                'JAVA',
+                'PHP',
+                'PYTHON',
+                'NODEJS',
+                'REACTJS',
+                'REACT NATIVE',
+                'FLUTTER',
+                'DOCKER',
+                'GO LANG',
+                'JAVASCRIPT',
+                'TYPESCRIPT'
+            ];
+
+            let filterItems = technologies.filter(item => item.indexOf(term) > -1);
+
+            if (filterItems.length > 0) {
+                for (let i = 0; i < filterItems.length; i++) {
+                    html += `<a class="dropdown-item" onclick="selectItem(this)" href="#">${filterItems[i]}</a>`;
+                }
+            } else {
+                html += `<a class="dropdown-item" onclick="selectItem(this)" href="#">${term}</a>`;
+            }
+            divAdd.innerHTML = html;
+        }
+        function selectItem(element) {
+            document.getElementById("type-techs").innerHTML = '';
+            document.getElementById('selected-item').innerText = element.innerText;
+        }
+
+    </script>
+</body>
+
+</html>
